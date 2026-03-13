@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль - Focus Timer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #dc3545;
+            --bg-color: #fff5f5;
+        }
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+        }
+        .profile-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            font-weight: 700;
+        }
+        .user-name {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .user-email {
+            color: #6c757d;
+            margin-bottom: 25px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+            margin-top: auto;
+        }
+        .btn-go-home {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        .btn-go-home:hover {
+            background-color: #c82333;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html" style="color: var(--primary-color);">Focus Timer</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Головна</a></li>
+                    <li class="nav-item"><a class="nav-link" href="registr.html">Реєстрація</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Вхід</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="profile.html">Профіль</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">Про додаток</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <h1>Особистий кабінет</h1>
+        
+        <div class="profile-card">
+            <p class="text-muted mb-1">Раді вас бачити,</p>
+            <div id="display-name" class="user-name">Завантаження...</div>
+            <p class="user-email">Email: <strong id="display-email">...</strong></p>
+            
+            <hr>
+            
+            <div class="d-grid gap-2">
+                <a href="index.html" class="btn btn-go-home mt-2">Перейти до таймера</a>
+                <button id="logout-btn" class="btn btn-link text-muted mt-2">Вийти з акаунта</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>&copy; 2026 "Focus Timer"</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedName = localStorage.getItem('focus_user_name');
+            const savedEmail = localStorage.getItem('focus_user_email');
+
+            if (savedName) {
+                document.getElementById('display-name').textContent = savedName;
+                document.getElementById('display-email').textContent = savedEmail;
+            } else {
+                document.getElementById('display-name').textContent = 'Гість';
+                document.getElementById('display-email').textContent = 'Немає даних';
+            }
+
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                localStorage.removeItem('focus_user_name');
+                localStorage.removeItem('focus_user_email');
+                alert('Ви вийшли з системи!');
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
+</body>
+</html>
